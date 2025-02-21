@@ -9,12 +9,32 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useForm, SubmitHandler } from "react-hook-form"
+
+
+interface LoginInputs {
+  email: string;
+  password: string;
+}
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  console.log('LoginForm')
+
+
+  const { register, 
+          handleSubmit, 
+          formState: { errors, isSubmitting }, 
+          reset,
+  } = useForm<LoginInputs>();
+  
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));  
+    console.log(data)
+    reset()
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -25,7 +45,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -34,6 +54,13 @@ export function LoginForm({
                   type="email"
                   placeholder="m@example.com"
                   required
+                  {...register("email", {
+                    minLength: 7,
+                    pattern: {
+                      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                      message: "Invalid email format"
+                    }
+                  })}
                 />
               </div>
               <div className="grid gap-2">
@@ -46,9 +73,13 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" required
+                  {...register("password", {
+                    minLength: 6,
+                    maxLength: 20,
+                  })} />
               </div>
-              <Button type="submit" className="w-full">
+              <Button disabled={isSubmitting} type="submit" className="w-full">
                 Login
               </Button>
               <Button variant="outline" className="w-full">
