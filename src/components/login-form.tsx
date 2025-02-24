@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
-
+import { FormValidationError } from "@/components/form-validation-error"
 
 interface LoginInputs {
   email: string;
@@ -54,14 +54,9 @@ export function LoginForm({
                   type="email"
                   placeholder="m@example.com"
                   required
-                  {...register("email", {
-                    minLength: 7,
-                    pattern: {
-                      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                      message: "Invalid email format"
-                    }
-                  })}
+                  {...register("email")}
                 />
+                {errors.email && (<FormValidationError message={`${errors.email.message}`}/>)}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -74,10 +69,8 @@ export function LoginForm({
                   </a>
                 </div>
                 <Input id="password" type="password" required
-                  {...register("password", {
-                    minLength: 6,
-                    maxLength: 20,
-                  })} />
+                  {...register("password")} />
+                {errors.password && (<FormValidationError message={`${errors.password.message}`}/>)}
               </div>
               <Button disabled={isSubmitting} type="submit" className="w-full">
                 Login

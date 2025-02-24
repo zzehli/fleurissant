@@ -6,7 +6,7 @@ interface FetchState<T> {
   error: Error | null
 }
 
-export const useFetch = <T,>(url: string): FetchState<T> => {
+export default function useFetch <T,>(url: string): FetchState<T> {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
     loading: true,

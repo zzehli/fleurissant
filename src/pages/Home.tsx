@@ -1,4 +1,4 @@
-import { useFetch } from '@/hooks/useFetch'
+import { useFetch } from '@/hooks'
 import { Product } from '@/@types'
 import { config } from '@/config'
 import { Button } from "@/components/ui/button"
