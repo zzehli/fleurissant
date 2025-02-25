@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormValidationError } from "@/components/form-validation-error"
+import { useLogin } from "@/hooks"
 
 interface LoginInputs {
   email: string;
@@ -28,9 +29,11 @@ export function LoginForm({
           formState: { errors, isSubmitting }, 
           reset,
   } = useForm<LoginInputs>();
+  const { login, isLoading, error } = useLogin()
   
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));  
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    await login(data.email, data.password)
     console.log(data)
     reset()
   }
@@ -72,7 +75,7 @@ export function LoginForm({
                   {...register("password")} />
                 {errors.password && (<FormValidationError message={`${errors.password.message}`}/>)}
               </div>
-              <Button disabled={isSubmitting} type="submit" className="w-full">
+              <Button disabled={isSubmitting || isLoading} type="submit" className="w-full">
                 Login
               </Button>
               <Button variant="outline" className="w-full">
@@ -87,6 +90,7 @@ export function LoginForm({
             </div>
           </form>
         </CardContent>
+        {error && <div>{error}</div>}
       </Card>
     </div>
   )

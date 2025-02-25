@@ -13,7 +13,7 @@ const prod: Config = {
   // Development urls
   const dev: Config = {
     urls: {
-      SERVER_URL: 'http://127.0.0.1:3000/'
+      SERVER_URL: 'http://127.0.0.1:3000'
     }
   };
   

@@ -1,10 +1,7 @@
-import { useFetch } from "@/hooks"
 import { createContext, useEffect, useReducer, Dispatch, ReactNode } from 'react';
 
 interface User {
-  id: string;
-  name: string;
-  email: string;
+  authorization: string;
 }
 
 interface AuthState {
