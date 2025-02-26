@@ -20,10 +20,13 @@ const useLogin = () => {
                 }
             })
         }).then(response => {
-            if (response.ok && response.headers.get('authorization')) {
-                dispatch({type: 'LOGIN', payload: {
-                    authorization: response.headers.get('authorization') || ''
-                }})
+            const authorization = response.headers.get('authorization') ?? ''
+
+            if (response.ok && authorization) {
+                const token = authorization.split(' ')[1]
+                console.log('token', token)
+                localStorage.setItem('user', token)
+                dispatch({type: 'LOGIN', payload: token})
             } else {
                 response.json().then(err => setError(err))
             }
