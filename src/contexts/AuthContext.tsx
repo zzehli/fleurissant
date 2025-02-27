@@ -1,9 +1,5 @@
 import { createContext, useEffect, useReducer, Dispatch, ReactNode } from 'react';
 
-type User = {
-  user: string | null;
-}
-
 type AuthState = {
   user: string | null;
   loading: boolean
@@ -15,9 +11,9 @@ type AuthAction =
 | { type: 'LOGOUT' }
 | { type: 'SET_LOADING', payload: boolean}
 
-interface AuthContextProps { user: string | null, dispatch: Dispatch<AuthAction>}
+interface AuthContextProps extends AuthState { dispatch: Dispatch<AuthAction> }
 
-interface AuthContextProviderProps { children: ReactNode}
+interface AuthContextProviderProps { children: ReactNode }
 
 export const AuthContext = createContext<AuthContextProps | null>(null)
 
@@ -43,6 +39,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const token = localStorage.getItem('user')!
     if (token){
       dispatch({ type: 'LOGIN', payload: token })
+      dispatch({ type: 'SET_LOADING', payload: false})
+    } else {
       dispatch({ type: 'SET_LOADING', payload: false})
     }
   }, [])
