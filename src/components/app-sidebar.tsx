@@ -1,10 +1,14 @@
-import { Sidebar, SidebarContent } from "@/components/ui/sidebar"
- 
+import { Sidebar, SidebarContent, SidebarFooter } from "@/components/ui/sidebar"
+import { Button } from "@/components/ui/button"
+import { useLogout } from "@/hooks"
 export function AppSidebar() {
+  const { logout } = useLogout()
   return (
     <Sidebar>
       <SidebarContent />
-      <div>side bar</div>
+      <SidebarFooter>
+        <Button onClick={() => logout()} >Logout</Button>
+      </SidebarFooter>
     </Sidebar>
   )
 }
