@@ -34,7 +34,6 @@ export function LoginForm({
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     // await new Promise((resolve) => setTimeout(resolve, 1000));
     await login(data.email, data.password)
-    console.log(data)
     reset()
   }
 
@@ -75,6 +74,7 @@ export function LoginForm({
                   {...register("password")} />
                 {errors.password && (<FormValidationError message={`${errors.password.message}`}/>)}
               </div>
+              {error && <FormValidationError message={error}/>} 
               <Button disabled={isSubmitting || isLoading} type="submit" className="w-full">
                 Login
               </Button>
@@ -90,7 +90,6 @@ export function LoginForm({
             </div>
           </form>
         </CardContent>
-        {error && <div>{error}</div>}
       </Card>
     </div>
   )

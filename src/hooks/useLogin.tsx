@@ -5,7 +5,7 @@ import { useAuthContext } from "@/hooks"
 const useLogin = () => {
     const { dispatch } = useAuthContext()
     const [ isLoading, setIsLoading ] = useState(false)
-    const [ error, setError ] = useState(null)
+    const [ error, setError ] = useState<string | null>(null)
 
     const login = async (email: string, password: string) => {
         setIsLoading(true)
@@ -28,7 +28,12 @@ const useLogin = () => {
                 localStorage.setItem('user', token)
                 dispatch({type: 'LOGIN', payload: token})
             } else {
-                response.json().then(err => setError(err))
+                console.log(response)
+                response.text().then(err => {
+                    // console.error(err)
+                    setError(err)
+                })
+                
             }
         }).catch(error => {
             console.error(error)
