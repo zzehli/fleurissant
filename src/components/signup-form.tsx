@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormValidationError } from "@/components/form-validation-error"
+import { useSignup } from "@/hooks" 
+import { useNavigate } from "react-router"
 
 interface SignupInputs {
   email: string;
@@ -21,17 +23,21 @@ export function SignupForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  
+  const { signup, isLoading, error } = useSignup()
+  const navigate = useNavigate()
+
   const { register, 
           handleSubmit, 
-          formState: { errors, isSubmitting }, 
+          formState: { errors, isSubmitting, isDirty }, 
           reset,
           getValues
   } = useForm<SignupInputs>();
   
   const onSubmit: SubmitHandler<SignupInputs> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));  
-    console.log(data)
+    await signup(data.email, data.password)
+    if (!error) {
+      navigate('/admin')
+    }
     reset()
   }
 
@@ -92,7 +98,7 @@ export function SignupForm({
                 {errors.confirmedPassword && <FormValidationError message={`${errors.confirmedPassword.message}`}/>}                
               </div>
               <Button 
-                disabled={isSubmitting}
+                disabled={isSubmitting || isLoading}
                 type="submit" 
                 className="w-full">
                 Sign Up
@@ -100,6 +106,7 @@ export function SignupForm({
               <Button variant="outline" className="w-full">
                 Sign Up with Google
               </Button>
+              {error && <FormValidationError message={error}/>} 
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}

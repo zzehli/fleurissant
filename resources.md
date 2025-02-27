@@ -4,3 +4,4 @@
 # auth
 * auth with context: https://github.com/iamshaunjp/MERN-Auth-Tutorial/tree/lesson-17
 * store token in context: https://www.robinwieruch.de/react-router-authentication/
+* logout operation: https://stackoverflow.com/questions/36294359/is-logout-useless-on-a-rest-api
