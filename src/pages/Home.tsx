@@ -45,14 +45,14 @@ function Home() {
                 Welcome to <span className="text-primary">Fleurissant</span>
               </h1>
               <p className="mt-3 max-w-md mx-auto text-base sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                Discover our house plants collection that will bring a touch of nature to your home.
+                Bring a touch of nature to your home.
               </p>
               <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
                 <div className="rounded-md shadow">
-                  <Button>Shop Now</Button>
+                  <Button size="lg" className='font-bold text-base'>Shop Now</Button>
                 </div>
                 <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                  <Button variant="secondary">Learn More</Button>
+                  <Button variant="secondary" size="lg" className='font-bold text-base'>Learn More</Button>
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@ function Home() {
       <>
         <div className="w-full py-12 md:py-24 lg:py-32">
           <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-3xl md:text-3xl">
               Our Featured Plants
             </h2>
             <Gallery products={products} />
@@ -82,9 +82,6 @@ function Home() {
                 </div>
               ))}
             </div> */}
-            <div className="text-center mt-12">
-              <Button>View All Products</Button>
-            </div>
           </div>
         </div>
       </>

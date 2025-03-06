@@ -7,16 +7,16 @@ interface GalleryProps {
 
 const Gallery = ({products}:GalleryProps) => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
+    <section className="w-full py-2 md:py-2 lg:py-2">
+      <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {products?.map((product) => (
             <Card key={product.id} className="overflow-hidden">
-              <div className="aspect-square relative">
+              <div className="relative">
                 <img
-                  src={product.image}
+                  src={product.image || "https://loremflickr.com/320/240"}
                   alt={product.name}
-                  className="object-cover"
+                  className="object-cover mx-auto mt-2"
                   style={{ objectFit: 'fill'}}
                 />
               </div>
@@ -24,9 +24,9 @@ const Gallery = ({products}:GalleryProps) => {
                 <CardTitle>{product.name}</CardTitle>
                 <CardDescription>{product.description}</CardDescription>
               </CardHeader>
-              <CardContent>
+              {/* <CardContent>
                 <p className="text-lg font-semibold">{product.price}</p>
-              </CardContent>
+              </CardContent> */}
               {/* <CardFooter>
                 <Button className="w-full">Add to Cart</Button>
               </CardFooter> */}
