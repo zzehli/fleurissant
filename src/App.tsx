@@ -6,7 +6,7 @@ import { AdminLayout, AdminHome } from './pages/admin'
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme"> 
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme"> 
       <Routes>
         <Route index element={<Home />} />
         <Route path="admin">
