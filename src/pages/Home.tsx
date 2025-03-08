@@ -7,7 +7,6 @@ function Home() {
   const { data: products, loading, error } = useFetch<Product[]>(`${config.urls.SERVER_URL}`)
   return (
     <div className="min-h-screen">
-      {/* nav bar */}
       <Navbar/>
       {/* hero section */}
       <>
