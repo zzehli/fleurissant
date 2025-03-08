@@ -1,7 +1,7 @@
 import { Sidebar, SidebarContent, SidebarFooter } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { useLogout } from "@/hooks"
-export function AppSidebar() {
+const AppSidebar = () => {
   const { logout } = useLogout()
   return (
     <Sidebar>
@@ -12,3 +12,4 @@ export function AppSidebar() {
     </Sidebar>
   )
 }
+export default AppSidebar

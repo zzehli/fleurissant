@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { FormValidationError } from "@/components/form-validation-error"
+import { FormValidationError } from "@/components"
 import { useSignup } from "@/hooks" 
 import { useNavigate } from "react-router"
 
@@ -19,7 +19,7 @@ interface SignupInputs {
   password: string;
   confirmedPassword: string;
 }
-export function SignupForm({
+export default function SignupForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
@@ -28,7 +28,7 @@ export function SignupForm({
 
   const { register, 
           handleSubmit, 
-          formState: { errors, isSubmitting, isDirty }, 
+          formState: { errors, isSubmitting }, 
           reset,
           getValues
   } = useForm<SignupInputs>();

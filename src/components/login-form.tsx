@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { FormValidationError } from "@/components/form-validation-error"
+import { FormValidationError } from "@/components"
 import { useLogin } from "@/hooks"
 
 interface LoginInputs {
@@ -18,7 +18,7 @@ interface LoginInputs {
   password: string;
 }
 
-export function LoginForm({
+export default function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
