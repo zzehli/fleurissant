@@ -6,7 +6,8 @@ import { CSSProperties } from "react"
 const Navbar = () => {
   const { user } = useAuthContext()
   const location = useLocation()
-  const { cartItems }= useCartItemsContext()
+  const { totals } = useCartItemsContext()
+  console.log("quantity", totals.quantity)
   const badgeStyle: CSSProperties = {
     borderRadius: '32px',
     position: 'absolute',
@@ -44,11 +45,11 @@ const Navbar = () => {
                 </Button>}
                 <Button variant="ghost" className="flex relative rounded-md px-3 py-2">
                 <ShoppingCart/>
-                  {(cartItems.totals.quantity > 0) && <span
+                  {(totals.quantity > 0) && <span
                     className="bg-primary text-primary-foreground"
                     style={badgeStyle}
                     >
-                    {cartItems.totals.quantity}
+                    {totals.quantity}
                   </span>}
                 </Button>
                  
