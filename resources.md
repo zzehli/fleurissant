@@ -8,3 +8,7 @@
 # price validation on carts
 * validate price info when user click on add item to cart
 * at checkout, use price from server side
+# webp
+* save webp, locally as well
+# detailed todos
+- [ ] cart available to both user and visitor
