@@ -18,7 +18,7 @@ interface AuthContextProviderProps { children: ReactNode }
 export const AuthContext = createContext<AuthContextProps | null>(null)
 
 // use reducer function to manage the state of the user
-export const authReducer = (state: AuthState, action: AuthAction): AuthState => {
+const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case 'LOGIN':
       return { user: action.payload, loading: false }
