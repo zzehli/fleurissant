@@ -15,10 +15,10 @@ const Cart = () => {
     return (
         <>
             <Navbar />
-            <div className="container mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="container mx-auto px-8 md:px-12 lg:px-8 py-8">
+                <div className="flex flex-col lg:flex-row justify-center gap-8">
                     {/* Cart Items Section */}
-                    <div className="lg:col-span-2">
+                    <div className="mx-8 w-max-content lg:w-1/3">
                         <h1 className="text-2xl font-medium mb-6">Bag</h1>
                         {Object.entries(items).map(([productId, quantity]) => (
                             <div key={productId}>
@@ -86,7 +86,7 @@ const Cart = () => {
 
                     {/* Order Summary Section */}
                     <div>
-                        <Card className="p-6">
+                        <Card className="mx-8 w-max-content lg:w-80">
                             <h2 className="text-2xl font-medium mb-6">Summary</h2>
 
                             <div className="space-y-4">
