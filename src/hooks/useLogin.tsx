@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { config } from "@/config"
 import { useAuthContext } from "@/hooks"
+import { useNavigate } from "react-router"
 
 const useLogin = () => {
     const { dispatch } = useAuthContext()
     const [ isLoading, setIsLoading ] = useState(false)
     const [ error, setError ] = useState<string | null>(null)
-
+    const navigate = useNavigate()
     const login = async (email: string, password: string) => {
         setIsLoading(true)
         fetch(`${config.urls.SERVER_URL}/admin/login`, {
@@ -27,10 +28,12 @@ const useLogin = () => {
                 console.log('token', token)
                 localStorage.setItem('user', token)
                 dispatch({type: 'LOGIN', payload: token})
+                navigate('/admin')
+
             } else {
-                console.log(response)
-                response.text().then(err => {
-                    setError(err)
+                response.json().then(err => {
+                    console.log(err.error)
+                    setError(err.error)
                 })
                 
             }

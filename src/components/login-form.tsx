@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormError } from "@/components"
 import { useLogin } from "@/hooks"
-import { useNavigate } from "react-router"
 
 interface LoginInputs {
   email: string;
@@ -27,15 +26,13 @@ export default function LoginForm({
 
   const { register, 
           handleSubmit, 
-          formState: { errors, isSubmitting }
+          formState: { errors, isSubmitting },
+          reset
   } = useForm<LoginInputs>();
 
   const { login, isLoading, error: LoginError } = useLogin()
-  
-  const navigate = useNavigate()
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     await login(data.email, data.password)
-    navigate("/admin")
   }
 
   return (

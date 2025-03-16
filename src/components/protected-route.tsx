@@ -10,7 +10,6 @@ const ProtectedRoute = ({children}: ProtectedRouteProps) => {
     const { user, loading } = useAuthContext()
     const navigate = useNavigate()
     useEffect(() => {
-        console.log('run effect')
         if (!user && !loading) {
           console.log('user not found');
           navigate('/admin/login');
