@@ -25,7 +25,7 @@ const Product = () => {
                     >
                     <CardContent>
                     <img
-                        src={product.image || "https://loremflickr.com/320/240"}
+                        src={product.image_url || "https://loremflickr.com/320/240"}
                         alt={product.name}
                         className="object-cover aspect-video rounded-xl w-full h-full"
                     />

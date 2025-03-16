@@ -6,5 +6,5 @@ export interface Product {
   active: boolean
   createdAt: Date
   updatedAt: Date
-  image: string
+  image_url: string
 }
