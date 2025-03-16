@@ -2,7 +2,7 @@ interface ErrorMessageProps {
   message: string | undefined;
 }
 
-export default function FormValidationError({ message }: ErrorMessageProps) {
+export default function FormError({ message }: ErrorMessageProps) {
   if (!message) return null;
 
   return (

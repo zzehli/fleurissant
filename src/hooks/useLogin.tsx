@@ -30,7 +30,6 @@ const useLogin = () => {
             } else {
                 console.log(response)
                 response.text().then(err => {
-                    // console.error(err)
                     setError(err)
                 })
                 

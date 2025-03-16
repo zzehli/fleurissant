@@ -10,8 +10,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { FormValidationError } from "@/components"
+import { FormError } from "@/components"
 import { useLogin } from "@/hooks"
+import { useNavigate } from "react-router"
 
 interface LoginInputs {
   email: string;
@@ -26,15 +27,15 @@ export default function LoginForm({
 
   const { register, 
           handleSubmit, 
-          formState: { errors, isSubmitting }, 
-          reset,
+          formState: { errors, isSubmitting }
   } = useForm<LoginInputs>();
-  const { login, isLoading, error } = useLogin()
+
+  const { login, isLoading, error: LoginError } = useLogin()
   
+  const navigate = useNavigate()
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
     await login(data.email, data.password)
-    reset()
+    navigate("/admin")
   }
 
   return (
@@ -58,7 +59,7 @@ export default function LoginForm({
                   required
                   {...register("email")}
                 />
-                {errors.email && (<FormValidationError message={`${errors.email.message}`}/>)}
+                {errors.email && (<FormError message={`${errors.email.message}`}/>)}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -72,9 +73,9 @@ export default function LoginForm({
                 </div>
                 <Input id="password" type="password" required
                   {...register("password")} />
-                {errors.password && (<FormValidationError message={`${errors.password.message}`}/>)}
+                {errors.password && (<FormError message={`${errors.password.message}`}/>)}
               </div>
-              {error && <FormValidationError message={error}/>} 
+              {LoginError && <FormError message={LoginError}/>} 
               <Button disabled={isSubmitting || isLoading} type="submit" className="w-full">
                 Login
               </Button>

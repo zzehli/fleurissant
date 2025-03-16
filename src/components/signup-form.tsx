@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { FormValidationError } from "@/components"
+import { FormError } from "@/components"
 import { useSignup } from "@/hooks" 
 import { useNavigate } from "react-router"
 
@@ -65,7 +65,7 @@ export default function SignupForm({
                     }
                   })}
                 />
-                {errors.email && (<FormValidationError message={`${errors.email.message}`}/>)}
+                {errors.email && (<FormError message={`${errors.email.message}`}/>)}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -81,7 +81,7 @@ export default function SignupForm({
                   }
                 })} 
                 />
-                {errors.password && <FormValidationError message={`${errors.password.message}`}/>}                
+                {errors.password && <FormError message={`${errors.password.message}`}/>}                
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -95,7 +95,7 @@ export default function SignupForm({
                   })
                 }
                 />
-                {errors.confirmedPassword && <FormValidationError message={`${errors.confirmedPassword.message}`}/>}                
+                {errors.confirmedPassword && <FormError message={`${errors.confirmedPassword.message}`}/>}                
               </div>
               <Button 
                 disabled={isSubmitting || isLoading}
@@ -106,7 +106,7 @@ export default function SignupForm({
               <Button variant="outline" className="w-full">
                 Sign Up with Google
               </Button>
-              {error && <FormValidationError message={error}/>} 
+              {error && <FormError message={error}/>} 
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
