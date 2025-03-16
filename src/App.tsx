@@ -2,7 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import ProtectedRoute from "@/components/protected-route"
 import { Home, Login, Signup, Collection, Product, Cart} from '@/pages'
 import {Routes, Route} from 'react-router'
-import { AdminLayout, AdminHome } from './pages/admin'
+import { AdminLayout, AdminHome, AdminProduct } from './pages/admin'
 
 function App() {
   return (
@@ -22,7 +22,12 @@ function App() {
                 <ProtectedRoute>
                 <AdminHome/>
                 </ProtectedRoute>
-                }/> 
+                }/>
+              <Route path="products" element={
+                <ProtectedRoute>
+                <AdminProduct/>
+                </ProtectedRoute>
+                }/>  
           </Route>
 
         </Route>
