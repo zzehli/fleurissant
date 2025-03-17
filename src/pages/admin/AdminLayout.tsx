@@ -5,9 +5,11 @@ export default function AdminLayout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <main
+        className="w-full"
+      >
         <SidebarTrigger />
-        <Outlet />
+        <Outlet/>
       </main>
     </SidebarProvider>
   )
