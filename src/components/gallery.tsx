@@ -20,7 +20,7 @@ const Gallery = ({ products }: GalleryProps) => {
                 >
                 <CardContent>
                 <img
-                    src={product.image_url || "https://placehold.co/600x400"}
+                    src={product.image_url || "https://placehold.co/300x400"}
                     alt={product.name}
                     className="object-cover aspect-video rounded-xl w-full h-full"
                   />

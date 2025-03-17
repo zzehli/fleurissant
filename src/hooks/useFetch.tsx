@@ -1,35 +1,39 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from "react";
+import { Product } from "@/@types";
+const useFetch= <T,> (url: string) => {
+    const [data, setData] = useState<T>();
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setIsError(false);
+        setIsLoading(true);
+  
+        try {
+          const result = await fetch(url);
+          console.log("result", result)
+          if (!result.ok) {
+            console.log("error")
+            const errorMsg = await result.text()
+            throw new Error(`Request error! status: ${result.status}, message: ${errorMsg}`)
+          }
+          const data = await result.json()
+          console.log("data", data)
 
-interface FetchState<T> {
-  data: null | T
-  loading: boolean
-  error: Error | null
-}
-
-export default function useFetch <T,>(url: string): FetchState<T> {
-  const [state, setState] = useState<FetchState<T>>({
-    data: null,
-    loading: true,
-    error: null,
-  })
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url)
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          setData(data)
+        } catch (error) {
+          setIsError(true);
+          console.log(error)
         }
-        const data = await response.json()
-        console.log(data)
-        setState({ data, loading: false, error: null })
-      } catch (error) {
-        setState({ data: null, loading: false, error: error as Error })
-      }
-    }
+  
+        setIsLoading(false);
+      };
+  
+      fetchData();
+    }, [url]);
+  
+    return { data, isLoading, isError };
+  };
 
-    fetchData()
-  }, [url])
-
-  return state
-}
+  export default useFetch;
