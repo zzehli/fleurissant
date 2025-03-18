@@ -12,10 +12,10 @@ const ProtectedRoute = ({children}: ProtectedRouteProps) => {
     useEffect(() => {
         if (!user && !loading) {
           console.log('user not found');
-          navigate('/admin/login');
+          navigate('/admin/login')
         }
       }, [user, loading, navigate]);
-    return children
+    return user? children: null
 }
 
 export default ProtectedRoute
