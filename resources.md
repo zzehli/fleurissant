@@ -12,6 +12,8 @@
 * save webp, locally as well
 # error handling
 * https://blog.sentry.io/guide-to-error-and-exception-handling-in-react/
+# protected route
+https://ui.dev/react-router-protected-routes-authentication
 # detailed todos
 - [ ] cart available to both user and visitor
 - [ ] implemement useProductFetch hook

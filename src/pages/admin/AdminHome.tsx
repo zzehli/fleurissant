@@ -1,8 +1,8 @@
 import { AppSidebar } from '@/components'
 const AdminHome = () => {
-
+  console.log('AdminHome')
   return (
-    <AppSidebar />
+    <div>hello</div>
   )
 }
 
