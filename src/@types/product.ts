@@ -7,4 +7,5 @@ export interface Product {
   createdAt: Date
   updatedAt: Date
   image_url: string
+  quantity: number
 }

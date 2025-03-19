@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Product } from "@/@types";
 const useFetch= <T,> (url: string, admin: boolean = false) => {
     const [data, setData] = useState<T>();
     const [isLoading, setIsLoading] = useState(false);
