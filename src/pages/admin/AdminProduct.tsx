@@ -33,9 +33,9 @@ const AdminProduct = () => {
             <TableRow key={product.id}>
               <TableCell className="font-medium">{product.name}</TableCell>
               <TableCell>{product.price}</TableCell>
-              <TableCell>{product.price}</TableCell>
+              <TableCell>{product.quantity}</TableCell>
               <TableCell className="flex justify-end">
-                <Link to="/"><SquareArrowOutUpRight size={22} /></Link>
+                <Link to={`/admin/products/${product.id}/stocks`}><SquareArrowOutUpRight size={22} /></Link>
               </TableCell>
             </TableRow>
           ))}

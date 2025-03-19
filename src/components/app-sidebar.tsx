@@ -24,10 +24,6 @@ const AppSidebar = () => {
       url: "/admin/products",
     },
     {
-      title: "Stocks",
-      url: "#",
-    },
-    {
       title: "Orders",
       url: "#",
     }
