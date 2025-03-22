@@ -4,7 +4,7 @@ import { useFetch } from '@/hooks'
 import { config } from '@/config'
 
 const Collection = () => {
-  const { data: products, loading, error } = useFetch<Product[]>(`${config.urls.SERVER_URL}/products`)
+  const { data: products } = useFetch<Product[]>(`${config.urls.SERVER_URL}/products`)
     
   return (
     <>

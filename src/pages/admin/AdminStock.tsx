@@ -11,14 +11,18 @@ import { useFetch } from "@/hooks";
 import { config } from "@/config"
 import { Stock } from "@/@types"
 import { useParams } from "react-router"
+import { Button } from "@/components/ui/button";
 
 const AdminStock = () => {
   const { productId } = useParams()
-  const { data, isLoading, isError } = useFetch<Stock[]>(`${config.urls.SERVER_URL}/admin/products/${productId}/stocks`, true)
+  const { data } = useFetch<Stock[]>(`${config.urls.SERVER_URL}/admin/products/${productId}/stocks`, true)
 
   return (
     <div className="p-10">
-      <Table className="">
+      <div className="p-3">
+        <Button variant="secondary">Finish</Button>
+      </div>
+      <Table>
         <TableCaption>A list of your recent product stocks.</TableCaption>
         <TableHeader>
           <TableRow>

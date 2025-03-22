@@ -1,6 +1,6 @@
 import { Navbar } from "@/components"
 import { useCartItemsContext } from "@/hooks"
-import { Minus, Plus, Trash2, Heart, Clock } from "lucide-react"
+import { Minus, Plus, Trash2, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"

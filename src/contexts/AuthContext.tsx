@@ -1,6 +1,5 @@
 import { createContext, useEffect, useReducer, Dispatch, ReactNode } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from 'react-router';
 
 type AuthState = {
   user: string | null;
@@ -37,28 +36,6 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [state, dispatch] = useReducer(authReducer, { user: null, loading: true })
-  const navigate = useNavigate()
-
-  // const isTokenExpired = (token: string) => {
-  //   console.log('check token')
-  //   try {
-  //     const decoded = jwtDecode(token);
-  //     if (!decoded.exp) {
-  //       return true;
-  //     }
-  //     return decoded.exp < Math.floor(Date.now() / 1000);
-  //   } catch (error) {
-  //     return true; // If error in decoding, assume expired
-  //   }
-  // };
-
-  // // Logout function
-  // const handleLogout = () => {
-  //   localStorage.removeItem("jwtToken");
-  //   // setUser(null);
-  //   dispatch({ type: 'LOGOUT' })
-  //   navigate("/admin/login"); // Redirect to login page
-  // };
 
   useEffect(() => {
     // console.log('user', localStorage.getItem('user'))
@@ -69,7 +46,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       dispatch({ type: 'LOGIN', payload: token })
       dispatch({ type: 'SET_LOADING', payload: false })
     } else {
-      dispatch({ type: 'LOGOUT' })
+      dispatch({ type: 'SET_LOADING', payload: false })
     }
   }, [])
 

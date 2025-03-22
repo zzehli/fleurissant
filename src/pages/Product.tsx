@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 const Product = () => {
     const params = useParams()
-    const { data: product, isLoading: loading, isError: error } = useFetch<ProductType>(`${config.urls.SERVER_URL}/products/${params.productId}`)
+    const { data: product, isError: error } = useFetch<ProductType>(`${config.urls.SERVER_URL}/products/${params.productId}`)
     const { dispatch } = useCartItemsContext()
     if (!product || error) return (
         <>

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Product } from '@/@types'
 import { useLocation, NavLink } from 'react-router'
 interface GalleryProps {
@@ -13,9 +13,11 @@ const Gallery = ({ products }: GalleryProps) => {
       <div className="container">
         <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${numCols} gap-6 mt-1`}>
           {products?.map((product) => (
-            <NavLink to={`/collection/${product.id}`} end>
+            <NavLink 
+              key={product.id} 
+              to={`/collection/${product.id}`} end
+            >
               <Card
-                key={product.id}
                 className="overflow-hidden"
                 >
                 <CardContent>

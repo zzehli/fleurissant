@@ -14,8 +14,7 @@ import { config } from "@/config"
 import { Product } from "@/@types"
 
 const AdminProduct = () => {
-  const { data, isLoading, isError } = useFetch<Product[]>(`${config.urls.SERVER_URL}/admin/products/`, true)
-  // console.log(data)
+  const { data } = useFetch<Product[]>(`${config.urls.SERVER_URL}/admin/products/`, true)
   return (
     <div className="p-10">
       <Table className="">

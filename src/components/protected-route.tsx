@@ -20,6 +20,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       }
       return decoded.exp < Math.floor(Date.now() / 1000);
     } catch (error) {
+      console.error('Error decoding token:', error);
       return true; // If error in decoding, assume expired
     }
   };
@@ -32,7 +33,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('user')
     if (!user && !loading) {
       console.log('user not found');
       navigate('/admin/login')
