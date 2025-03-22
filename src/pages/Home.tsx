@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Gallery } from '@/components'
 import { Link } from 'react-router'
 function Home() {
-  const { data: products, loading, error } = useFetch<Product[]>(`${config.urls.SERVER_URL}`)
+  const { data: products } = useFetch<Product[]>(`${config.urls.SERVER_URL}`)
   return (
     <div className="min-h-screen">
       {/* hero section */}

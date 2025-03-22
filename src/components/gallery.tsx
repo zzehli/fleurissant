@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/com
 import { Product } from '@/@types'
 import { useLocation, NavLink } from 'react-router'
 interface GalleryProps {
-  products: Product[] | null
+  products: Product[] | undefined
 }
 
 const Gallery = ({ products }: GalleryProps) => {
