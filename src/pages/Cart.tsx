@@ -20,8 +20,8 @@ const Cart = () => {
                     {/* Cart Items Section */}
                     <div className="mx-8 w-max-content lg:w-1/3">
                         <h1 className="text-2xl font-medium mb-6">Bag</h1>
-                        {Object.entries(items).map(([productId, quantity]) => (
-                            <div key={productId}>
+                        {items.map(({id, price, name, quantity}) => (
+                            <div key={id}>
                                 <div className="grid grid-cols-[120px_1fr_auto] gap-4 py-4">
                                     {/* Product Image */}
                                     {/* <div className="bg-gray-50 rounded-md overflow-hidden">
@@ -30,7 +30,7 @@ const Cart = () => {
 
                                     {/* Product Details */}
                                     <div className="flex flex-col">
-                                        <h3 className="font-medium text-lg">{productId}</h3>
+                                        <h3 className="font-medium text-lg">{name}</h3>
                                         {/* <p className="text-muted-foreground">{item.description}</p> */}
                                         {/* <p className="text-muted-foreground">{item.color}</p> */}
                                         {/* <div className="mt-1">
@@ -40,7 +40,7 @@ const Cart = () => {
 
                                     {/* Price */}
                                     <div className="text-right">
-                                        <p className="font-medium">${quantity}</p>
+                                        <p className="font-medium">${price}</p>
                                     </div>
                                 </div>
 
@@ -51,7 +51,7 @@ const Cart = () => {
                                             variant="outline"
                                             size="icon"
                                             className="h-8 w-8 rounded-full"
-                                            onClick={() => dispatch({ type: 'DECREASE_COUNT', payload: { productId: String(productId), price: 12 } })}
+                                            onClick={() => dispatch({ type: 'DECREMENT_COUNT', payload: { id, price, name, quantity: 1 } })}
                                         >
                                             <Minus className="h-3 w-3" />
                                             <span className="sr-only">Decrease quantity</span>
@@ -63,14 +63,14 @@ const Cart = () => {
                                             variant="outline"
                                             size="icon"
                                             className="h-8 w-8 rounded-full"
-                                            onClick={() => dispatch({ type: 'ADD_ITEM', payload: { productId: String(productId), quantity: 1, price: 12 } })}
+                                            onClick={() => dispatch({ type: 'INCREMENT_COUNT', payload: { id, name, quantity: 1, price } })}
                                         >
                                             <Plus className="h-3 w-3" />
                                             <span className="sr-only">Increase quantity</span>
                                         </Button>
                                     </div>
 
-                                    <Button variant="ghost" size="icon" className="rounded-full" onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: { productId: String(productId), price: 12 } })}>
+                                    <Button variant="ghost" size="icon" className="rounded-full" onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: { id, name, quantity: 1, price } })}>
                                         <Trash2 className="h-4 w-4" />
                                         <span className="sr-only">Remove item</span>
                                     </Button>

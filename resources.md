@@ -16,4 +16,4 @@
 https://ui.dev/react-router-protected-routes-authentication
 # detailed todos
 - [ ] cart available to both user and visitor
-- [ ] implemement useProductFetch hook
+- [ ] cache images

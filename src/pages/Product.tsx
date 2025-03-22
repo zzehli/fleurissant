@@ -24,7 +24,7 @@ const Product = () => {
 
     const handleAddToCart = () => {
         console.log('Adding to cart:', product)
-        dispatch({ type: 'ADD_ITEM', payload: { productId: String(product.id), quantity: 1, price: product.price } })
+        dispatch({ type: 'INCREMENT_COUNT', payload: { id: String(product.id), name: product.name, quantity: 1, price: product.price } })
     }
     return (
         <>
