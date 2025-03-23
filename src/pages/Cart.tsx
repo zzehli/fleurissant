@@ -1,16 +1,41 @@
 import { Navbar } from "@/components"
-import { useCartItemsContext } from "@/hooks"
-import { Minus, Plus, Trash2, Heart } from "lucide-react"
+import { useCartItemsContext, useFetch } from "@/hooks"
+import { Minus, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-
-
+import { config } from "@/config"
+import { useEffect, useState } from "react"
 const Cart = () => {
     const { totals, items, dispatch } = useCartItemsContext()
+    const [loading, setLoading] = useState(false)
+    const onCheckout = () => {
+        setLoading(true)
+        fetch(`${config.urls.SERVER_URL}/checkout`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'cart': items
+            })
+        }).then(response => {
+            console.log(response.json())
+            if (response.ok) {
+                console.log('success')
+            } else {
+                response.json().then(err => {
+                    console.log(err.error)
+                })
 
-    // const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+            }
+        }).catch(error => {
+            console.error(error)
+        }).finally(() => {
+            setLoading(false)
+        })
+
+    }
 
     return (
         <>
@@ -20,7 +45,7 @@ const Cart = () => {
                     {/* Cart Items Section */}
                     <div className="mx-8 w-max-content lg:w-1/3">
                         <h1 className="text-2xl font-medium mb-6">Bag</h1>
-                        {items.map(({id, price, name, quantity}) => (
+                        {items.map(({ id, price, name, quantity }) => (
                             <div key={id}>
                                 <div className="grid grid-cols-[120px_1fr_auto] gap-4 py-4">
                                     {/* Product Image */}
@@ -31,11 +56,7 @@ const Cart = () => {
                                     {/* Product Details */}
                                     <div className="flex flex-col">
                                         <h3 className="font-medium text-lg">{name}</h3>
-                                        {/* <p className="text-muted-foreground">{item.description}</p> */}
-                                        {/* <p className="text-muted-foreground">{item.color}</p> */}
-                                        {/* <div className="mt-1">
-                                            <span className="text-muted-foreground">Size</span> <span className="underline">{item.size}</span>
-                                        </div> */}
+
                                     </div>
 
                                     {/* Price */}
@@ -76,7 +97,6 @@ const Cart = () => {
                                     </Button>
 
                                     <Button variant="ghost" size="icon" className="rounded-full">
-                                        <Heart className="h-4 w-4" />
                                         <span className="sr-only">Add to favorites</span>
                                     </Button>
                                 </div>
@@ -123,11 +143,25 @@ const Cart = () => {
 
                                 {/* <Button className="w-full bg-black text-white hover:bg-gray-800 h-12 mt-4">Guest Checkout</Button> */}
 
-                                <Button className="w-full bg-black text-white hover:bg-gray-800 h-12">Member Checkout</Button>
+                                <Button 
+                                    variant="default" 
+                                    className="w-full  h-12"
+                                    onClick={() => onCheckout()}
+                                    disabled={loading}
+                                >
+                                    Non-Member Checkout
+                                </Button>
+                                <Button 
+                                    variant="secondary" 
+                                    className="w-full  h-12"
+                                    disabled={loading}
+                                >
+                                    Member Checkout
+                                </Button>
 
-                                <div className="bg-gray-100 rounded-md p-4 flex justify-center mt-4">
+                                {/* <div className="bg-gray-100 rounded-md p-4 flex justify-center mt-4">
                                     <img src="/placeholder.svg?height=30&width=80" alt="PayPal" className="h-8" />
-                                </div>
+                                </div> */}
                             </div>
                         </Card>
                     </div>
