@@ -1,40 +1,32 @@
+import { useState } from "react"
 import { Navbar } from "@/components"
-import { useCartItemsContext, useFetch } from "@/hooks"
+import { useCartItemsContext } from "@/hooks"
 import { Minus, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { config } from "@/config"
-import { useEffect, useState } from "react"
 const Cart = () => {
     const { totals, items, dispatch } = useCartItemsContext()
     const [loading, setLoading] = useState(false)
-    const onCheckout = () => {
+    const onCheckout = async () => {
         setLoading(true)
-        fetch(`${config.urls.SERVER_URL}/checkout`, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                'cart': items
-            })
-        }).then(response => {
-            console.log(response.json())
-            if (response.ok) {
-                console.log('success')
-            } else {
-                response.json().then(err => {
-                    console.log(err.error)
-                })
-
+            const response = await fetch(`${config.urls.SERVER_URL}/checkout`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    'cart': items
+                })})
+            
+            if (!response.ok) {
+                const errorMsg = await response.text()
+                throw new Error(`Request error! status: ${response.status}, message: ${errorMsg}`)
+                setLoading(false)
             }
-        }).catch(error => {
-            console.error(error)
-        }).finally(() => {
-            setLoading(false)
-        })
-
+            const data = await response.json()
+            window.location.href = data.url 
     }
 
     return (
@@ -141,23 +133,22 @@ const Cart = () => {
                                     <span>${totals.total.toFixed(2)}</span>
                                 </div>
 
-                                {/* <Button className="w-full bg-black text-white hover:bg-gray-800 h-12 mt-4">Guest Checkout</Button> */}
 
                                 <Button 
                                     variant="default" 
                                     className="w-full  h-12"
                                     onClick={() => onCheckout()}
-                                    disabled={loading}
+                                    disabled={loading || !items.length}
                                 >
                                     Non-Member Checkout
                                 </Button>
-                                <Button 
+                                {/* <Button 
                                     variant="secondary" 
                                     className="w-full  h-12"
-                                    disabled={loading}
+                                    disabled={loading || !items.length}
                                 >
                                     Member Checkout
-                                </Button>
+                                </Button> */}
 
                                 {/* <div className="bg-gray-100 rounded-md p-4 flex justify-center mt-4">
                                     <img src="/placeholder.svg?height=30&width=80" alt="PayPal" className="h-8" />

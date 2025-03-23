@@ -3,7 +3,7 @@ import ProtectedRoute from "@/components/protected-route"
 import { Home, Login, Signup, Collection, Product, Cart } from '@/pages'
 import { Routes, Route } from 'react-router'
 import { AdminLayout, AdminHome, AdminProduct, AdminStock } from './pages/admin'
-
+import { CheckoutSuccess } from "./pages/checkout"
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
@@ -14,6 +14,9 @@ function App() {
           <Route path=":productId" element={<Product />} />
         </Route>
         <Route path="cart" element={<Cart />} />
+        <Route path="checkout">
+          <Route path="success" element={<CheckoutSuccess />} />
+        </Route>
         <Route path="admin">
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
