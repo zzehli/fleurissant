@@ -6,7 +6,7 @@ interface Config {
 
 const prod: Config = {
     urls: {
-      SERVER_URL: ""
+      SERVER_URL: "https://fleurissant.jaeli.my.id"
     }
   };
   
