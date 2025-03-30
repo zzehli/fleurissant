@@ -7,7 +7,7 @@ import { AuthContextProvider } from "./contexts/AuthContext"
 import { CartItemsContextProvider } from './contexts/CartItemsContext';
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <BrowserRouter basename='/fleurissant'>
     <StrictMode>
       <AuthContextProvider>
         <CartItemsContextProvider>
