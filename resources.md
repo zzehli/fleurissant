@@ -14,6 +14,9 @@
 * https://blog.sentry.io/guide-to-error-and-exception-handling-in-react/
 # protected route
 https://ui.dev/react-router-protected-routes-authentication
+# deploy with gh-pages
+1. push
+2. pnpm run deploy
 # detailed todos
 - [ ] cart available to both user and visitor
 - [ ] cache images
