@@ -11,7 +11,7 @@ const Gallery = ({ products }: GalleryProps) => {
   return (
     <section className="w-full py-2 md:py-2 lg:py-2">
       <div className="container">
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${numCols} gap-6 mt-1`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${numCols} gap-10 mt-1`}>
           {products?.map((product) => (
             <NavLink 
               key={product.id} 
@@ -24,7 +24,7 @@ const Gallery = ({ products }: GalleryProps) => {
                 <img
                     src={product.image_url || "https://placehold.co/300x400"}
                     alt={product.name}
-                    className="object-cover aspect-video rounded-xl w-full h-full"
+                    className="object-cover aspect-square rounded-xl max-w-[250px] h-full m-auto"
                   />
                 </CardContent>
                   
@@ -32,7 +32,6 @@ const Gallery = ({ products }: GalleryProps) => {
                   <p className='text-lg font-semibold'>
                     {product.name}
                   </p>
-                  <p>${product.price}</p>
                 </CardFooter>
               </Card>
             </NavLink>

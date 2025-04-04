@@ -27,9 +27,7 @@ function Home() {
                     </Link>
                   </Button>
                 </div>
-                <div className="mt-3 rounded-md sm:mt-0 sm:ml-3">
-                  <Button variant="secondary" size="lg" className='font-bold text-base shadow'>Learn More</Button>
-                </div>
+                
               </div>
             </div>
           </div>

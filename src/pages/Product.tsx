@@ -6,7 +6,7 @@ import { Navbar } from "@/components"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Separator } from "@radix-ui/react-separator"
-
+  
 const Product = () => {
     const params = useParams()
     const { data: product, isError: error } = useFetch<ProductType>(`${config.urls.SERVER_URL}/products/${params.productId}`)
@@ -29,7 +29,7 @@ const Product = () => {
     return (
         <>
             <Navbar />
-            <div className="container mx-auto px-4 py-8 max-w-7xl">}
+            <div className="container mx-auto px-4 py-8 max-w-7xl">
                 <div
                     className="flex flex-col md:flex-row md:gap-12 lg:gap-16"
                 >
@@ -38,7 +38,7 @@ const Product = () => {
                             <img
                                 src={product.image_url || "https://placehold.co/600x400"}
                                 alt={product.name}
-                                className="object-cover w-full aspect-square hover:scale-105 transition-transform duration-300"
+                                className="object-cover w-full aspect-square transition-transform duration-300"
                             />
                         </div>
                     </div>
@@ -58,7 +58,7 @@ const Product = () => {
                         <div className="mt-auto">
                             <Button size="lg" onClick={handleAddToCart} className="w-full sm:w-auto px-8 font-medium">
                                 Add to Cart
-                            </Button>
+                            </Button>                  
                         </div>
                     </div>
                 </div>
