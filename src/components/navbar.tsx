@@ -4,7 +4,8 @@ import { useLocation, Link } from "react-router"
 import { ShoppingCart } from 'lucide-react'
 import { CSSProperties } from "react"
 const Navbar = () => {
-  const { user } = useAuthContext()
+  // This is wrong, the auth context is only for admin
+  // const { user } = useAuthContext()
   const location = useLocation()
   const { totals } = useCartItemsContext()
   const badgeStyle: CSSProperties = {
@@ -40,9 +41,9 @@ const Navbar = () => {
                   <Link to="/collection">Collection</Link>
                 </Button>
               }
-              {!user && <Button variant="ghost" className="px-3 py-2 rounded-md text-sm font-medium">
+              {/* {!user && <Button variant="ghost" className="px-3 py-2 rounded-md text-sm font-medium">
                 <Link to="/login">Login</Link>
-              </Button>}
+              </Button>} */}
               <Button variant="ghost" className="flex relative rounded-md px-3 py-2">
                 <Link to="/cart">
                   <ShoppingCart />
