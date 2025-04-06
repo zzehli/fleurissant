@@ -6,7 +6,13 @@ import { Navbar } from "@/components"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Separator } from "@radix-ui/react-separator"
-  
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 const Product = () => {
     const params = useParams()
     const { data: product, isError: error } = useFetch<ProductType>(`${config.urls.SERVER_URL}/products/${params.productId}`)
@@ -56,9 +62,33 @@ const Product = () => {
                         </div>
 
                         <div className="mt-auto">
-                            <Button size="lg" onClick={handleAddToCart} className="w-full sm:w-auto px-8 font-medium">
-                                Add to Cart
-                            </Button>                  
+                            {product.quantity > 0 ?
+                                <Button size="lg"
+                                    onClick={handleAddToCart}
+                                    className="w-full sm:w-auto px-8 font-medium"
+                                >
+                                    Add to Cart
+                                </Button>
+                                :
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <span>
+                                                <Button size="lg"
+                                                    onClick={handleAddToCart}
+                                                    className="w-full sm:w-auto px-8 font-medium"
+                                                    disabled
+                                                >
+                                                    Add to Cart
+                                                </Button>
+                                            </span>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>This product is out of stock</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            }
                         </div>
                     </div>
                 </div>
