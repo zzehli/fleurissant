@@ -1,4 +1,3 @@
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Product } from '@/@types'
 import { useLocation, NavLink } from 'react-router'
 import { useRef, useCallback, useState, useEffect } from 'react'
@@ -13,7 +12,7 @@ const ScrollableGallery = () => {
     console.log('page', page)
     const pageParams = new URLSearchParams({ page: page.toString() })
     console.log(`${config.urls.SERVER_URL}/products?${pageParams}`)
-    const { data, isError, isLoading } = useFetch<Product[]>(`${config.urls.SERVER_URL}/products?${pageParams}`)
+    const { data, isLoading } = useFetch<Product[]>(`${config.urls.SERVER_URL}/products?${pageParams}`)
     //for infinite scrolling
     const observer = useRef<IntersectionObserver | null>(null)
     const [moreProducts, setMoreProducts] = useState(true)
