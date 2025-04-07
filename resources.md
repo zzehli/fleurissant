@@ -20,3 +20,5 @@ https://ui.dev/react-router-protected-routes-authentication
 # detailed todos
 - [ ] cart available to both user and visitor
 - [ ] cache images
+- [x] finite scroll
+- [ ] add customer user
