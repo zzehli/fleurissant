@@ -1,7 +1,11 @@
 import { Product } from '@/@types'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 
-const productCard = (product: Product) => {
+interface ProductCardProps {
+    product: Product
+}
+
+const productCard = ({ product }: ProductCardProps) => {
     return (
         <Card
             className="overflow-hidden"
