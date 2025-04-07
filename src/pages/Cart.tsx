@@ -36,10 +36,10 @@ const Cart = () => {
                 <div className="flex flex-col lg:flex-row justify-center gap-8">
                     {/* Cart Items Section */}
                     <div className="mx-8 w-max-content lg:w-1/3">
-                        <h1 className="text-2xl font-medium mb-6">Bag</h1>
+                        <h1 className="text-2xl font-semibold mb-6">Bag</h1>
                         {items.map(({ id, price, name, quantity }) => (
                             <div key={id}>
-                                <div className="grid grid-cols-[120px_1fr_auto] gap-4 py-4">
+                                <div className="grid grid-cols-[300px_1fr_auto] gap-4 py-4">
                                     {/* Product Image */}
                                     {/* <div className="bg-gray-50 rounded-md overflow-hidden">
                                         <img src={item.image || "/placeholder.svg"} alt={productId} className="w-full h-full object-cover" />
@@ -99,7 +99,7 @@ const Cart = () => {
                     {/* Order Summary Section */}
                     <div>
                         <Card className="mx-8 w-max-content lg:w-80">
-                            <h2 className="text-2xl font-medium mb-6">Summary</h2>
+                            <h2 className="text-2xl font-semibold mb-6">Summary</h2>
 
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">

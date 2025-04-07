@@ -1,5 +1,5 @@
 import { Button } from "./ui/button"
-import { useAuthContext, useCartItemsContext } from "@/hooks"
+import { useCartItemsContext } from "@/hooks"
 import { useLocation, Link } from "react-router"
 import { ShoppingCart } from 'lucide-react'
 import { CSSProperties } from "react"
