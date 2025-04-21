@@ -4,16 +4,6 @@ This is the frontend application for the Fleurissant, built with React, TypeScri
 
 checkout the live site: https://zzehli.github.io/fleurissant/
 
-## Table of Contents
-
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup and Installation](#setup-and-installation)
-- [Scripts](#scripts)
-- [Deployment](#deployment)
-- [Folder Structure](#folder-structure)
-- [License](#license)
-
 ---
 
 ## Features
