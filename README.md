@@ -1,9 +1,38 @@
-# Fleurissant frontend
-## Dev notes
-start with `pnpm vite`
-## TODO
-- [ ] add NoMatch route: https://www.robinwieruch.de/react-router-authentication/
-- [x] cart
-- [x] admin interface
-- [ ] stripe integration
-- [ ] customer interface
+# Plants Frontend
+
+This is the frontend application for the Fleurissant, built with React, TypeScript, and Vite. It includes features such as product browsing, cart management, and checkout integration with Stripe.
+
+checkout the live site: https://zzehli.github.io/fleurissant/
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Setup and Installation](#setup-and-installation)
+- [Scripts](#scripts)
+- [Deployment](#deployment)
+- [Folder Structure](#folder-structure)
+- [License](#license)
+
+---
+
+## Features
+
+- Browse products with an infinite scroll gallery.
+- Add, remove, and update items in the cart.
+- Checkout integration with Stripe.
+- Admin panel for managing products (protected routes).
+- Customer order management
+
+---
+
+## Technologies Used
+
+- **React**: Component-based UI library.
+- **TypeScript**: Static typing for JavaScript.
+- **Vite**: Fast build tool for modern web projects.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **React Router**: Client-side routing.
+- **Stripe**: Payment processing integration.
+
+---
