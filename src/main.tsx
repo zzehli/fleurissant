@@ -2,12 +2,12 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
-import { BrowserRouter } from "react-router";
+import { BrowserRouter as Router } from "react-router";
 import { AuthContextProvider } from "./contexts/AuthContext"
 import { CartItemsContextProvider } from './contexts/CartItemsContext';
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename='/fleurissant'>
+  <Router basename='/fleurissant'>
     <StrictMode>
       <AuthContextProvider>
         <CartItemsContextProvider>
@@ -15,5 +15,5 @@ createRoot(document.getElementById('root')!).render(
         </CartItemsContextProvider>
       </AuthContextProvider>
     </StrictMode>
-  </BrowserRouter>
+  </Router>
 )

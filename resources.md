@@ -22,6 +22,7 @@ https://ui.dev/react-router-protected-routes-authentication
 - [ ] cache images
 - [x] finite scroll
 - [ ] add customer user
+- [ ] add cart limit
 # Dev notes
 start with `pnpm vite`
 # TODO

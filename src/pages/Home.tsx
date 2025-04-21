@@ -27,7 +27,7 @@ function Home() {
                     </Link>
                   </Button>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -36,9 +36,6 @@ function Home() {
       <>
         <div className="w-full py-6 md:py-12 lg:py-12">
           <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-3xl md:text-3xl">
-              Our Featured Plants
-            </h2>
             <Gallery products={products} />
           </div>
         </div>
