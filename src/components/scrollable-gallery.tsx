@@ -10,27 +10,26 @@ const ScrollableGallery = () => {
 
     const [page, setPage] = useState(1)
     console.log('page', page)
-    const pageParams = new URLSearchParams({ page: page.toString() })
-    console.log(`${config.urls.SERVER_URL}/products?${pageParams}`)
-    const { data, isLoading } = useFetch<Product[]>(`${config.urls.SERVER_URL}/products?${pageParams}`)
+    const { data, isLoading } = useFetch<Product[]>(`${config.urls.SERVER_URL}/products?page=${page}`)
     //for infinite scrolling
     const observer = useRef<IntersectionObserver | null>(null)
-    const [moreProducts, setMoreProducts] = useState(true)
-    const [products, setProducts] = useState<Product[]>(data || [])
+    const [moreProducts, setMoreProducts] = useState(false)
+    const [products, setProducts] = useState<Product[]>([])
+    console.log('products', products)
+
     useEffect(() => {
+        //minor problem with strict mode load the initial data twice
         if (data) {
             setProducts((prev) => [...prev, ...data])
         }
-    }, [data])
 
-    useEffect(() => {
-        console.log('change more prod')
-        if (products && products.length > 0) {
+        if (data && data.length > 0) {
             setMoreProducts(true)
-        } else if (products && products.length === 0) {
+        } else if (data && data.length === 0) {
             setMoreProducts(false)
         }
-    }, [products])
+    }, [data])
+
     const lastProductRef = useCallback((node: Element | null) => {
         console.log('lastProductRef isLoading', isLoading)
         if (isLoading) return
