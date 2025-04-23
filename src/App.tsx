@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider"
 import ProtectedRoute from "@/components/protected-route"
-import { Home, Login, Signup, Collection, Product, Cart } from '@/pages'
+import { Home, Login, Signup, Collection, Product, Cart, NoMatch } from '@/pages'
 import { Routes, Route } from 'react-router'
 import { AdminLayout, AdminHome, AdminProduct, AdminStock } from './pages/admin'
 import { CheckoutSuccess } from "./pages/checkout"
@@ -35,7 +35,7 @@ function App() {
               <Route path=":productId">
                 <Route path="stocks" element={
                   <ProtectedRoute>
-                  <AdminStock />
+                    <AdminStock />
                   </ProtectedRoute>
                 } />
               </Route>
@@ -44,6 +44,7 @@ function App() {
           </Route>
 
         </Route>
+        <Route path="*" element={<NoMatch />} />
       </Routes>
     </ThemeProvider>
   )
