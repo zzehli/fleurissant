@@ -4,13 +4,18 @@ import { config } from '@/config'
 import { Button } from "@/components/ui/button"
 import { Gallery } from '@/components'
 import { Link } from 'react-router'
+import bgPhoto from '@/assets/photo-1487070183336-b863922373d4.jpg'
+
 function Home() {
   const { data: products } = useFetch<Product[]>(`${config.urls.SERVER_URL}`)
   return (
     <div className="min-h-screen">
       {/* hero section */}
       <div>
-        <div className="h-[70vh] flex items-center bg-cover bg-[url('src/assets/photo-1487070183336-b863922373d4.jpg')]">
+        <div
+          className="h-[70vh] flex items-center bg-cover"
+          style={{ backgroundImage: `url(${bgPhoto})` }}
+        >
           <div className="flex items-center justify-center bg-neutral-500/60 h-full w-full mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-stone-200">
