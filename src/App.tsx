@@ -18,7 +18,7 @@ function App() {
           <Route path="success" element={<CheckoutSuccess />} />
         </Route>
         <Route path="admin">
-          <Route path="login" element={<Login />} />
+          <Route path="login" element={<Login role={"admin"} />} />
           <Route path="signup" element={<Signup />} />
           <Route element={<AdminLayout />}>
             <Route index element={

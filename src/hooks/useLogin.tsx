@@ -2,20 +2,22 @@ import { useState } from "react"
 import { config } from "@/config"
 import { useAuthContext } from "@/hooks"
 import { useNavigate } from "react-router"
+import { Role } from "@/@types"
 
 const useLogin = () => {
     const { dispatch } = useAuthContext()
-    const [ isLoading, setIsLoading ] = useState(false)
-    const [ error, setError ] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate()
-    const login = async (email: string, password: string) => {
+    const login = async (email: string, password: string, role: Role) => {
         setIsLoading(true)
-        fetch(`${config.urls.SERVER_URL}/admin/login`, {
+        const rolePath = role === 'admin' ? 'admin' : 'customer'
+        fetch(`${config.urls.SERVER_URL}/${rolePath}/login`, {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                'admin': {
+                [rolePath]: {
                     "email": email,
                     "password": password
                 }
@@ -27,7 +29,7 @@ const useLogin = () => {
                 const token = authorization.split(' ')[1]
                 console.log('token', token)
                 localStorage.setItem('user', token)
-                dispatch({type: 'LOGIN', payload: token})
+                dispatch({ type: 'LOGIN', payload: token })
                 //use form redirection instead: https://reactrouter.com/tutorials/address-book#updating-contacts-with-formdata
                 navigate('/admin')
 
@@ -36,7 +38,7 @@ const useLogin = () => {
                     console.log(err.error)
                     setError(err.error)
                 })
-                
+
             }
         }).catch(error => {
             console.error(error)
@@ -45,7 +47,7 @@ const useLogin = () => {
             setIsLoading(false)
         })
     }
-    
+
     return {
         login,
         isLoading,

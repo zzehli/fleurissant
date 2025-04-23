@@ -12,26 +12,34 @@ import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormError } from "@/components"
 import { useLogin } from "@/hooks"
-
+import { Role } from "@/@types"
 interface LoginInputs {
   email: string;
   password: string;
 }
 
+//can't extend role as type Role
+interface LoginFormProps
+  extends React.ComponentPropsWithoutRef<"div"> {
+  role: Role;
+}
+
 export default function LoginForm({
   className,
+  role,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: LoginFormProps) {
 
 
-  const { register, 
-          handleSubmit, 
-          formState: { errors, isSubmitting },
+  const { register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
   } = useForm<LoginInputs>();
+
 
   const { login, isLoading, error: LoginError } = useLogin()
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
-    await login(data.email, data.password)
+    await login(data.email, data.password, role)
   }
 
   return (
@@ -55,7 +63,7 @@ export default function LoginForm({
                   required
                   {...register("email")}
                 />
-                {errors.email && (<FormError message={`${errors.email.message}`}/>)}
+                {errors.email && (<FormError message={`${errors.email.message}`} />)}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -69,9 +77,9 @@ export default function LoginForm({
                 </div>
                 <Input id="password" type="password" required
                   {...register("password")} />
-                {errors.password && (<FormError message={`${errors.password.message}`}/>)}
+                {errors.password && (<FormError message={`${errors.password.message}`} />)}
               </div>
-              {LoginError && <FormError message={LoginError}/>} 
+              {LoginError && <FormError message={LoginError} />}
               <Button disabled={isSubmitting || isLoading} type="submit" className="w-full">
                 Login
               </Button>
