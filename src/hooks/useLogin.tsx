@@ -12,6 +12,7 @@ const useLogin = () => {
     const login = async (email: string, password: string, role: Role) => {
         setIsLoading(true)
         const rolePath = role === 'admin' ? 'admin' : 'customer'
+        console.log('rolePath', rolePath)
         fetch(`${config.urls.SERVER_URL}/${rolePath}/login`, {
             method: 'POST',
             mode: 'cors',
@@ -30,8 +31,8 @@ const useLogin = () => {
                 console.log('token', token)
                 localStorage.setItem('user', token)
                 dispatch({ type: 'LOGIN', payload: token })
-                //use form redirection instead: https://reactrouter.com/tutorials/address-book#updating-contacts-with-formdata
-                navigate('/admin')
+                //TODO: use form redirection instead: https://reactrouter.com/tutorials/address-book#updating-contacts-with-formdata
+                navigate(`/${role}`)
 
             } else {
                 response.json().then(err => {

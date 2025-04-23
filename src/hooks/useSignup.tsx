@@ -1,18 +1,21 @@
 import { useState } from "react"
 import { config } from "@/config"
+import { Role } from "@/@types"
 
 const useSignup = () => {
-    const [ isLoading, setIsLoading ] = useState(false)
-    const [ error, setError ] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
 
-    const signup = async (email: string, password: string) => {
+    const signup = async (email: string, password: string, role: Role) => {
         setIsLoading(true)
-        fetch(`${config.urls.SERVER_URL}/admin/signup`, {
+        const rolePath = role === 'admin' ? 'admin' : 'customer'
+
+        fetch(`${config.urls.SERVER_URL}/${rolePath}/signup`, {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                'admin': {
+                [rolePath]: {
                     "email": email,
                     "password": password
                 }
@@ -31,7 +34,7 @@ const useSignup = () => {
             setIsLoading(false)
         })
     }
-    
+
     return {
         signup,
         isLoading,

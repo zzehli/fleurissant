@@ -11,32 +11,41 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormError } from "@/components"
-import { useSignup } from "@/hooks" 
+import { useSignup } from "@/hooks"
 import { useNavigate } from "react-router"
+import { Role } from "@/@types"
 
 interface SignupInputs {
   email: string;
   password: string;
   confirmedPassword: string;
 }
+
+interface SignupFormProps
+  extends React.ComponentPropsWithoutRef<"div"> {
+  role: Role;
+}
+
 export default function SignupForm({
   className,
+  role,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: SignupFormProps) {
   const { signup, isLoading, error } = useSignup()
   const navigate = useNavigate()
 
-  const { register, 
-          handleSubmit, 
-          formState: { errors, isSubmitting }, 
-          reset,
-          getValues
+  const { register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    getValues
   } = useForm<SignupInputs>();
-  
+
   const onSubmit: SubmitHandler<SignupInputs> = async (data) => {
-    await signup(data.email, data.password)
+    await signup(data.email, data.password, role)
+    // TODO: change to form action
     if (!error) {
-      navigate('/admin')
+      navigate(`/${role}`)
     }
     reset()
   }
@@ -56,7 +65,7 @@ export default function SignupForm({
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
-                  id="email" type="email" placeholder="m@example.com" required 
+                  id="email" type="email" placeholder="m@example.com" required
                   {...register("email", {
                     minLength: 7,
                     pattern: {
@@ -65,48 +74,48 @@ export default function SignupForm({
                     }
                   })}
                 />
-                {errors.email && (<FormError message={`${errors.email.message}`}/>)}
+                {errors.email && (<FormError message={`${errors.email.message}`} />)}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input id="password" type="password" required 
-                {...register("password", {
-                  minLength: 6,
-                  maxLength: 20,
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,
-                    message: "Password must contain at least one uppercase letter, one lowercase letter and one number"
-                  }
-                })} 
+                <Input id="password" type="password" required
+                  {...register("password", {
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,
+                      message: "Password must contain at least one uppercase letter, one lowercase letter and one number"
+                    }
+                  })}
                 />
-                {errors.password && <FormError message={`${errors.password.message}`}/>}                
+                {errors.password && <FormError message={`${errors.password.message}`} />}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="confirm-password">Confirm Password</Label>
                 </div>
-                <Input id="confirm-password" type="password" required 
-                {
+                <Input id="confirm-password" type="password" required
+                  {
                   ...register("confirmedPassword", {
                     validate: (value) =>
                       value === getValues("password") || "Passwords must match",
                   })
-                }
+                  }
                 />
-                {errors.confirmedPassword && <FormError message={`${errors.confirmedPassword.message}`}/>}                
+                {errors.confirmedPassword && <FormError message={`${errors.confirmedPassword.message}`} />}
               </div>
-              <Button 
+              <Button
                 disabled={isSubmitting || isLoading}
-                type="submit" 
+                type="submit"
                 className="w-full">
                 Sign Up
               </Button>
               <Button variant="outline" className="w-full">
                 Sign Up with Google
               </Button>
-              {error && <FormError message={error}/>} 
+              {error && <FormError message={error} />}
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
