@@ -2,7 +2,7 @@
 
 This is the frontend application for the Fleurissant, built with React, TypeScript, and Vite. It includes features such as product browsing, cart management, and checkout integration with Stripe.
 
-checkout the live site: https://zzehli.github.io/fleurissant/
+checkout the live site: https://jaeli.space/fleurissant/
 
 ---
 

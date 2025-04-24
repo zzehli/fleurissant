@@ -21,12 +21,12 @@ https://ui.dev/react-router-protected-routes-authentication
 - [ ] cart available to both user and visitor
 - [ ] cache images
 - [x] finite scroll
-- [ ] add customer user
+- [x] add customer user
 - [ ] add cart limit
 # Dev notes
 start with `pnpm vite`
 # TODO
-- [ ] add NoMatch route: https://www.robinwieruch.de/react-router-authentication/
+- [x] add NoMatch route: https://www.robinwieruch.de/react-router-authentication/
 - [x] cart
 - [x] admin interface
 - [ ] stripe integration
