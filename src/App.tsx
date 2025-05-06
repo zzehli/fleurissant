@@ -18,7 +18,6 @@ function App() {
         </Route>
         <Route path="admin">
           <Route path="login" element={<Login role={"admin"} />} />
-          <Route path="signup" element={<Signup role={"admin"} />} />
           <Route element={<AdminLayout />}>
             <Route index element={
               <ProtectedRoute>
