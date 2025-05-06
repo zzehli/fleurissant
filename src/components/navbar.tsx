@@ -31,11 +31,6 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              {location.pathname !== "/" &&
-                <Button variant="ghost" className="px-3 py-2 rounded-md text-sm font-medium">
-                  <Link to="/">Home</Link>
-                </Button>
-              }
               {location.pathname !== "/collection" &&
                 <Button variant="ghost" className="px-3 py-2 rounded-md text-sm font-medium">
                   <Link to="/collection">Collection</Link>
