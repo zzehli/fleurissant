@@ -1,5 +1,4 @@
 import { createContext, useEffect, useReducer, Dispatch, ReactNode } from 'react';
-import { jwtDecode } from 'jwt-decode';
 
 type AuthState = {
   user: string | null;
@@ -20,7 +19,6 @@ export const AuthContext = createContext<AuthContextProps | null>(null)
 
 // use reducer function to manage the state of the user
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
-  console.log(action)
   switch (action.type) {
     case 'LOGIN':
       return { user: action.payload, loading: false }
@@ -38,11 +36,9 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [state, dispatch] = useReducer(authReducer, { user: null, loading: true })
 
   useEffect(() => {
-    // console.log('user', localStorage.getItem('user'))
     const token = localStorage.getItem('user')!
 
     if (token) {
-      console.log('user', jwtDecode(token))
       dispatch({ type: 'LOGIN', payload: token })
       dispatch({ type: 'SET_LOADING', payload: false })
     } else {
@@ -50,7 +46,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
   }, [])
 
-  // console.log('AuthContext state:', state)
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 import { useAuthContext } from "@/hooks"
 import { useNavigate } from "react-router";
 import { jwtDecode } from 'jwt-decode';
-
 interface ProtectedRouteProps {
   children: React.ReactNode;
+  // role: Role
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
@@ -12,7 +12,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate()
 
   const isTokenExpired = (token: string) => {
-    console.log('check token')
     try {
       const decoded = jwtDecode(token);
       if (!decoded.exp) {
