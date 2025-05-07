@@ -7,7 +7,7 @@ import { Link } from 'react-router'
 import bgPhoto from '@/assets/photo-1487070183336-b863922373d4.jpg'
 
 function Home() {
-  const { data: products } = useFetch<Product[]>(`${config.urls.SERVER_URL}`)
+  const { data: products, isLoading } = useFetch<Product[]>(`${config.urls.SERVER_URL}`)
   return (
     <div className="min-h-screen">
       {/* hero section */}
@@ -41,7 +41,7 @@ function Home() {
       <>
         <div className="w-full py-6 md:py-12 lg:py-12">
           <div className="container mx-auto px-4 md:px-6">
-            <Gallery products={products} />
+            <Gallery products={products} productIsLoading={isLoading} />
           </div>
         </div>
       </>
