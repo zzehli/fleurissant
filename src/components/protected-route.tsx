@@ -2,12 +2,14 @@ import React, { useEffect } from "react"
 import { useAuthContext } from "@/hooks"
 import { useNavigate } from "react-router";
 import { jwtDecode } from 'jwt-decode';
+import { Role } from "@/@types";
+
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  // role: Role
+  role: Role
 }
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
   const { user, loading, dispatch } = useAuthContext()
   const navigate = useNavigate()
 
@@ -28,13 +30,13 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     // localStorage.removeItem("jwtToken");
     // setUser(null);
     dispatch({ type: 'LOGOUT' })
-    navigate("/admin/login"); // Redirect to login page
+    navigate(`/${role}/login`); // Redirect to login page
   };
 
   useEffect(() => {
     if (!user && !loading) {
       console.log('user not found');
-      navigate('/admin/login')
+      navigate(`/${role}/login`)
     } else if (user && isTokenExpired(user)) {
       handleLogout()
     }

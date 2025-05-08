@@ -10,6 +10,27 @@
 * at checkout, use price from server side
 # webp
 * save webp, locally as well
+# image loading
+* use `after` to run len(products) times before loading the image https://underscorejs.org/#after
+```
+function Images({ urls }) {
+  const [loading, setLoading] = useState(true);  const onComplete = after(urls.length, () => {
+    setLoading(false);
+    console.log("loaded");
+  });  return (
+    <>
+      {loading && <span>Loading ...</span>}
+      {urls.map((url, index) => (
+        <img 
+         src={url} 
+         onLoad={onComplete} 
+         onError={onComplete} 
+         key={url} />
+      ))}
+    </>
+  );
+}
+```
 # error handling
 * https://blog.sentry.io/guide-to-error-and-exception-handling-in-react/
 # protected route

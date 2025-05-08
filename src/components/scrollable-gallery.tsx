@@ -17,7 +17,7 @@ const ScrollableGallery = () => {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
-        //minor problem with strict mode load the initial data twice
+        //TODO: minor problem with strict mode load the initial data twice
         if (data) {
             setProducts((prev) => [...prev, ...data])
         }

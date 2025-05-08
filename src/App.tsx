@@ -3,6 +3,7 @@ import ProtectedRoute from "@/components/protected-route"
 import { Home, Login, Signup, Collection, Product, Cart, NoMatch, AdminLayout, AdminHome, AdminProduct, AdminStock, CustomerOrders } from '@/pages'
 import { Routes, Route } from 'react-router'
 import { CheckoutSuccess } from "./pages/checkout"
+import { RoleObject } from "@/@types"
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
@@ -17,22 +18,22 @@ function App() {
           <Route path="success" element={<CheckoutSuccess />} />
         </Route>
         <Route path="admin">
-          <Route path="login" element={<Login role={"admin"} />} />
+          <Route path="login" element={<Login role={RoleObject.ADMIN} />} />
           <Route element={<AdminLayout />}>
             <Route index element={
-              <ProtectedRoute>
+              <ProtectedRoute role={RoleObject.ADMIN}>
                 <AdminHome />
               </ProtectedRoute>
             } />
             <Route path="products">
               <Route index element={
-                <ProtectedRoute>
+                <ProtectedRoute role={RoleObject.ADMIN}>
                   <AdminProduct />
                 </ProtectedRoute>
               } />
               <Route path=":productId">
                 <Route path="stocks" element={
-                  <ProtectedRoute>
+                  <ProtectedRoute role={RoleObject.ADMIN}>
                     <AdminStock />
                   </ProtectedRoute>
                 } />
@@ -45,7 +46,11 @@ function App() {
         <Route path="customer">
           <Route path="login" element={<Login role={"customer"} />} />
           <Route path="signup" element={<Signup role={"customer"} />} />
-          <Route index element={<CustomerOrders />} />
+          <Route index element={
+            <ProtectedRoute role={RoleObject.CUSTOMER}>
+              <CustomerOrders />
+            </ProtectedRoute>
+          } />
         </Route>
         <Route path="*" element={<NoMatch />} />
       </Routes>
