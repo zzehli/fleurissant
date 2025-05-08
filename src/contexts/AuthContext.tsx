@@ -29,7 +29,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         loading: false
       }
     case 'LOGOUT':
-      // 'user' in actually the token
+      // 'user' is actually the token
       localStorage.removeItem('user')
       localStorage.removeItem('role')
       return { user: null, role: null, loading: false }

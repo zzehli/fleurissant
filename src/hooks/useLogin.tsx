@@ -29,6 +29,7 @@ const useLogin = () => {
             if (response.ok && authorization) {
                 const token = authorization.split(' ')[1]
                 localStorage.setItem('user', token)
+                localStorage.setItem('role', role)
                 dispatch({ type: 'LOGIN', payload: { token, role } })
                 //TODO: use form redirection instead: https://reactrouter.com/tutorials/address-book#updating-contacts-with-formdata
                 navigate(`/${role}`)

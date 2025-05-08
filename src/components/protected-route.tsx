@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
-  const { user, loading, dispatch } = useAuthContext()
+  const { user, role: userRole, loading, dispatch } = useAuthContext()
   const navigate = useNavigate()
 
   const isTokenExpired = (token: string) => {
@@ -27,8 +27,6 @@ const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
   };
 
   const handleLogout = () => {
-    // localStorage.removeItem("jwtToken");
-    // setUser(null);
     dispatch({ type: 'LOGOUT' })
     navigate(`/${role}/login`); // Redirect to login page
   };
@@ -39,9 +37,14 @@ const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
       navigate(`/${role}/login`)
     } else if (user && isTokenExpired(user)) {
       handleLogout()
+    } else if (user && userRole !== role) {
+      // Redirect if user's role doesn't match the required role
+      console.log('unauthorized role');
+      handleLogout()
     }
-  }, [user, loading, navigate]);
-  return user ? children : null
+  }, [user, userRole, loading, navigate]);
+
+  return user && userRole === role ? children : null
 }
 
 export default ProtectedRoute
