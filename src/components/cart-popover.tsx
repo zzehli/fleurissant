@@ -12,11 +12,11 @@ import { ShoppingCart } from "lucide-react"
 import { CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { X } from "lucide-react"
 import { ShoppingBag } from "lucide-react"
-
+import { useLocation } from "react-router"
 function CartPopover() {
     const { totals, items } = useCartItemsContext()
     const prevQuantityRef = useRef(totals.quantity);
-
+    const location = useLocation()
     const [open, setOpen] = useState(false)
     console.log("open ", open)
     const badgeStyle: CSSProperties = {
@@ -31,8 +31,7 @@ function CartPopover() {
     }
 
     useEffect(() => {
-        // Only open popover if quantity has increased AND popover is currently closed
-        if (totals.quantity > prevQuantityRef.current && !open) {
+        if (totals.quantity > prevQuantityRef.current && !open && location.pathname !== "/cart") {
             setOpen(true);
             // Only update the ref when we actually open the popover
             prevQuantityRef.current = totals.quantity;
@@ -40,7 +39,7 @@ function CartPopover() {
     }, [totals.quantity, open])
 
     return (
-        <Popover open={open} onOpenChange={setOpen} modal={true}>
+        <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button variant="ghost" className="flex relative rounded-md px-3 py-2">
                     <ShoppingCart />
@@ -53,8 +52,9 @@ function CartPopover() {
                     </span>}
                 </Button>
             </PopoverTrigger>
+            {/* TODO: make it sticky */}
             <PopoverContent
-                className="w-screen fixed top-0 md:w-96 sticky"
+                className="w-screen md:w-96"
             >
                 <CardHeader className="p-4 pb-2 flex flex-row items-center justify-between space-y-0">
                     <div className="flex items-center gap-2">
@@ -84,11 +84,7 @@ function CartPopover() {
                     <div className="space-y-4 max-h-60 overflow-auto">
                         {items.length > 0 ? (
                             items.map((item, index) => (
-                                <div key={index} className="flex gap-4">
-                                    <div className="h-20 w-20 rounded-md overflow-hidden flex-shrink-0 bg-muted flex items-center justify-center">
-                                        {/* Placeholder instead of image since Item type doesn't have image */}
-                                        <ShoppingBag className="h-10 w-10 text-muted-foreground" />
-                                    </div>
+                                <div key={index} className="flex">
                                     <div className="flex flex-col justify-center">
                                         <h3 className="font-medium text-sm">{item.name}</h3>
                                         <p className="text-sm text-muted-foreground">Quantity: {item.quantity}</p>
@@ -112,6 +108,7 @@ function CartPopover() {
                         </Button>
                     </Link>
                 </CardFooter>
+
             </PopoverContent>
         </Popover>
     )
