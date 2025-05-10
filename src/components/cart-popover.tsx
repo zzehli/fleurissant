@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import {
     Popover,
@@ -5,11 +6,15 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { Link } from "react-router"
-import { CSSProperties } from "react"
+import { CSSProperties, useState } from "react"
 import { useCartItemsContext } from "@/hooks"
 import { ShoppingCart } from "lucide-react"
+
 function CartPopover() {
     const { totals } = useCartItemsContext()
+    const prevQuantityRef = useRef(totals.quantity);
+
+    const [open, setOpen] = useState(false)
     const badgeStyle: CSSProperties = {
         borderRadius: '32px',
         position: 'absolute',
@@ -20,8 +25,19 @@ function CartPopover() {
         minWidth: 20,
         minHeight: 20,
     }
+
+    useEffect(() => {
+
+        // Only open popover if quantity has increased from previous value
+        if (!open && totals.quantity > prevQuantityRef.current) {
+            setOpen(true);
+            prevQuantityRef.current = totals.quantity;
+        }
+
+    }, [totals.quantity])
+
     return (
-        <Popover>
+        <Popover open={open}>
             <PopoverTrigger asChild>
                 <Button variant="ghost" className="flex relative rounded-md px-3 py-2">
                     <Link to="/cart">
@@ -38,6 +54,7 @@ function CartPopover() {
             </PopoverTrigger>
             <PopoverContent className="w-80">
                 something is here
+                <Button onClick={() => setOpen(false)}>Close</Button>
             </PopoverContent>
         </Popover>
     )
