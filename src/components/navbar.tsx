@@ -1,22 +1,10 @@
 import { Button } from "./ui/button"
 import { useLocation, Link } from "react-router"
-import { ShoppingCart } from 'lucide-react'
 import { CartPopover } from "."
 const Navbar = () => {
-  // This is wrong, the auth context is only for admin
-  // const { user } = useAuthContext()
+
   const location = useLocation()
-  // const { totals } = useCartItemsContext()
-  // const badgeStyle: CSSProperties = {
-  //   borderRadius: '32px',
-  //   position: 'absolute',
-  //   top: 0,
-  //   right: 2,
-  //   translate: '33% -33%',
-  //   fontSize: 11,
-  //   minWidth: 20,
-  //   minHeight: 20,
-  // }
+
 
   return (
     <>

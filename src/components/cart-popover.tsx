@@ -9,10 +9,9 @@ import { Link } from "react-router"
 import { CSSProperties, useState } from "react"
 import { useCartItemsContext } from "@/hooks"
 import { ShoppingCart } from "lucide-react"
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
+import { CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { X } from "lucide-react"
 import { ShoppingBag } from "lucide-react"
-import { ArrowRight } from "lucide-react"
 
 function CartPopover() {
     const { totals, items } = useCartItemsContext()
