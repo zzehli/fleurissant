@@ -4,7 +4,7 @@ import { useRef, useCallback, useState, useEffect } from 'react'
 import { useFetch } from '@/hooks'
 import { config } from '@/config'
 import { ProductCard, ProductCardSkeleton } from '.'
-const LIMIT = 3
+const LIMIT = 6
 const ScrollableGallery = () => {
     const location = useLocation()
     const numCols = location.pathname === '/collection' ? 'lg:grid-cols-3' : 'lg:grid-cols-4'
