@@ -38,7 +38,11 @@ function CartPopover() {
         function handleClickOutside(event: MouseEvent) {
             // Handle clicks outside the cart closes the cart
             // tradeoff: click add to cart button will close and reopen the cart
-            if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
+            const target = event.target as HTMLElement;
+            const isAddToCartButton = target.closest('button')?.textContent?.trim() === 'Add to Cart';
+
+            // Only close the cart if it's not an "Add to Cart" button click
+            if (!isAddToCartButton && cartRef.current && !cartRef.current.contains(target)) {
                 setOpen(false);
             }
         }
