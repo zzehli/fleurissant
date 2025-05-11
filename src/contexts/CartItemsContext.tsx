@@ -20,16 +20,15 @@ interface CartItemsContextProps extends CartItemsState {
     dispatch: Dispatch<CartItemsAction>
 }
 
-type CartItemsAction = 
-| {type: 'INCREMENT_COUNT', payload: Item}
-| {type: 'REMOVE_ITEM', payload: Item}
-| {type: 'DECREMENT_COUNT', payload: Item}
-| {type: 'CLEAR_CART'}
+type CartItemsAction =
+    | { type: 'INCREMENT_COUNT', payload: Item }
+    | { type: 'REMOVE_ITEM', payload: Item }
+    | { type: 'DECREMENT_COUNT', payload: Item }
+    | { type: 'CLEAR_CART' }
 
 export const CartItemsContext = createContext<CartItemsContextProps | null>(null)
 
 const cartItemsReducer = (state: CartItemsState, action: CartItemsAction): CartItemsState => {
-    console.log(action, state)
     switch (action.type) {
         case 'INCREMENT_COUNT': {
             // const newItems = [...state.items] 
@@ -47,7 +46,7 @@ const cartItemsReducer = (state: CartItemsState, action: CartItemsAction): CartI
                     }
                 })
             } else {
-                newItems = [...state.items, {...action.payload, quantity: 1}]   
+                newItems = [...state.items, { ...action.payload, quantity: 1 }]
             }
             return {
                 // ...state,
@@ -72,13 +71,13 @@ const cartItemsReducer = (state: CartItemsState, action: CartItemsAction): CartI
                     } else {
                         return item
                     }
-                })            
+                })
             } else if (item) {
                 newItems = state.items.filter((item) => item.id !== action.payload.id)
             } else {
                 newItems = [...state.items]
             }
-            
+
             return {
                 items: newItems,
                 totals: {
@@ -86,7 +85,7 @@ const cartItemsReducer = (state: CartItemsState, action: CartItemsAction): CartI
                     total: state.totals.total - action.payload.price,
                 }
             }
-            
+
         }
         case 'REMOVE_ITEM': {
             const item = state.items.find((item) => item.id === action.payload.id)
@@ -112,12 +111,11 @@ const cartItemsReducer = (state: CartItemsState, action: CartItemsAction): CartI
     }
 }
 export const CartItemsContextProvider = ({ children }: CartItemsContextProviderProps) => {
-    const [state, dispatch] = useReducer(cartItemsReducer, {items: [], totals: {quantity: 0, total: 0}})
-    console.log('CartItemsContextProvider state:', state)
+    const [state, dispatch] = useReducer(cartItemsReducer, { items: [], totals: { quantity: 0, total: 0 } })
 
     return (
-        <CartItemsContext.Provider value={{...state, dispatch}}>
-            { children }
+        <CartItemsContext.Provider value={{ ...state, dispatch }}>
+            {children}
         </CartItemsContext.Provider>
     )
 }

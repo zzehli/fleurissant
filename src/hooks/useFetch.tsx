@@ -15,14 +15,12 @@ const useFetch = <T,>(url: string, admin: boolean = false) => {
             'Authorization': admin ? `Bearer ${localStorage.getItem('user')}` : ''
           }
         });
-        console.log("result", result)
         if (!result.ok) {
           console.log("error")
           const errorMsg = await result.text()
           throw new Error(`Request error! status: ${result.status}, message: ${errorMsg}`)
         }
         const data = await result.json()
-        console.log("data", data)
 
         setData(data)
       } catch (error) {
@@ -32,7 +30,6 @@ const useFetch = <T,>(url: string, admin: boolean = false) => {
 
       setIsLoading(false);
     };
-    console.log('url fetch run', fetch)
     fetchData();
   }, [url]);
 

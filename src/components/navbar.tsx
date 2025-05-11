@@ -17,7 +17,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center md:gap-2">
               {location.pathname !== "/collection" &&
                 <Button variant="ghost" className="px-3 py-2 rounded-md text-sm font-medium">
                   <Link to="/collection">Collection</Link>
