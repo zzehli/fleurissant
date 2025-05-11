@@ -72,7 +72,7 @@ function CartPopover() {
             </Button>
 
             {open && (
-                <div className="md:absolute right-0 fixed w-full mt-2 md:w-96 z-50">
+                <div className="md:absolute md:bottom-auto right-0 bottom-0 fixed w-full mt-2 md:w-96 z-50">
                     <div className="bg-popover rounded-md border shadow-md">
                         <CardHeader className="p-4 pb-2 flex flex-row items-center justify-between space-y-0">
                             <div className="flex items-center gap-2">
