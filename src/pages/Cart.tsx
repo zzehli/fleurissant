@@ -33,19 +33,19 @@ const Cart = () => {
     return (
         <>
             <Navbar />
-            <div className="container mx-auto px-8 md:px-12 lg:px-8 py-8">
-                <div className="flex flex-col lg:flex-row justify-center gap-8">
+            <div className="container mx-auto px-4 md:px-12 lg:px-8 py-8">
+                <div className="flex flex-col lg:flex-row justify-center gap-y-20">
                     {/* Cart Items Section */}
                     {items.length === 0 ?
-                        (<div className="mx-8 w-max-content lg:w-1/3">
+                        (<div className="mx-8 lg:w-1/2">
                             <h1 className="text-2xl font-semibold mb-3 ">Cart</h1>
                             <h2 className="text-lg font-semibold">Your cart is empty.</h2>
                         </div>) :
-                        (<div className="mx-8 w-max-content lg:w-1/3">
-                            <h1 className="text-2xl font-semibold mb-6">Cart Items</h1>
+                        (<div className="mx-8 lg:w-1/2">
+                            <h1 className="text-3xl font-semibold mb-8">Cart Items</h1>
                             {items.map(({ id, price, name, quantity }) => (
                                 <div key={id}>
-                                    <div className="grid grid-cols-[300px_1fr_auto] gap-4 py-4">
+                                    <div className="flex justify-between md:gap-24 pb-4">
                                         {/* Product Image */}
                                         {/* <div className="bg-gray-50 rounded-md overflow-hidden">
                                         <img src={item.image || "/placeholder.svg"} alt={productId} className="w-full h-full object-cover" />
@@ -53,13 +53,13 @@ const Cart = () => {
 
                                         {/* Product Details */}
                                         <div className="flex flex-col">
-                                            <h3 className="font-medium text-lg">{name}</h3>
+                                            <h3 className="font-medium text-md">{name}</h3>
 
                                         </div>
 
                                         {/* Price */}
                                         <div className="text-right">
-                                            <p className="font-medium">${price}</p>
+                                            <p className="font-medium text-md">${price}</p>
                                         </div>
                                     </div>
 
@@ -107,7 +107,7 @@ const Cart = () => {
                     {/* Order Summary Section */}
                     <div>
                         <Card className="mx-8 w-max-content lg:w-80">
-                            <h2 className="text-2xl font-semibold mb-6">Summary</h2>
+                            <h2 className="text-3xl font-semibold mb-8">Summary</h2>
 
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">
